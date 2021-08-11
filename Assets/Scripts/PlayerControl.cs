@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour
     // reference to player Rigidbody
     public Rigidbody rb;
     // Variable for player speed
-    public fload speed = 2000f;
+    public float speed = 2000f;
     // Start is called before the first frame update
     void Start()
     {
