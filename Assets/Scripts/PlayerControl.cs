@@ -5,37 +5,44 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     // reference to player Rigidbody
-    public Rigidbody rb;
+    public Rigidbody player;
     // Variable for player speed
     public float speed = 2000f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Variable for player score
+    private int score = 0;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Forward
-        if (Input.GetKey("w"))
+        if (Input.GetKey("w") || Input.GetKey("up"))
         {
-            rb.AddForce(0, 0, speed * Time.deltaTime);
+            player.AddForce(0, 0, speed * Time.deltaTime);
         }
         // Backward
-        if (Input.GetKey("s"))
+        if (Input.GetKey("s") || Input.GetKey("down"))
         {
-            rb.AddForce(0, 0, -speed * Time.deltaTime);
+            player.AddForce(0, 0, -speed * Time.deltaTime);
         }
         // Left
-        if (Input.GetKey("a"))
+        if (Input.GetKey("a") || Input.GetKey("left"))
         {
-            rb.AddForce(-speed * Time.deltaTime, 0, 0);
+            player.AddForce(-speed * Time.deltaTime, 0, 0);
         }
         // Right
-        if (Input.GetKey("d"))
+        if (Input.GetKey("d") || Input.GetKey("right"))
         {
-            rb.AddForce(speed * Time.deltaTime, 0, 0);
+            player.AddForce(speed * Time.deltaTime, 0, 0);
+        }
+    }
+    // Method for collecting coin objects
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Pickup")
+        {
+            Destroy(other.gameObject);
+            score++;
+            Debug.Log($"Score: {score}");
         }
     }
 }
