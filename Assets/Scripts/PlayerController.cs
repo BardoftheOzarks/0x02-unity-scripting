@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     // reference to player Rigidbody
     public Rigidbody player;
@@ -37,7 +38,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
     // Method for collecting coin objects
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Pickup")
         {
@@ -49,6 +50,18 @@ public class PlayerControl : MonoBehaviour
         {
             health--;
             Debug.Log($"Health: {health}");
+        }
+        if (other.tag == "Goal")
+        {
+            Debug.Log("You win!");
+        }
+    }
+    void Update()
+    {
+        if (health == 0)
+        {
+            Debug.Log("Game Over!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
