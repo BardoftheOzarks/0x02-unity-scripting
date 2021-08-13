@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour
     public Rigidbody player;
     // Variable for player speed
     public float speed = 2000f;
+    public int health = 5;
     // Variable for player score
     private int score = 0;
 
@@ -43,6 +44,11 @@ public class PlayerControl : MonoBehaviour
             Destroy(other.gameObject);
             score++;
             Debug.Log($"Score: {score}");
+        }
+        if (other.tag == "Trap")
+        {
+            health--;
+            Debug.Log($"Health: {health}");
         }
     }
 }
